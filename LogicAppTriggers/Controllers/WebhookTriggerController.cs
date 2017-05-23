@@ -13,10 +13,11 @@ namespace LogicAppTriggers.Controllers
     public class WebhookTriggerController : ApiController
     {
         public static List<string> subscriptions = new List<string>();
+
         /// <summary>
-        /// Recieve a subscription to a webhook.  
+        /// Receive subscription to webhook.
         /// </summary>
-        /// <param name="callbackUrl">URL to get from Logic Apps - @listCallbackUrl()</param>
+        /// <param name="callbackUrl">The callback URL to get from the Logic Apps engine - @listCallbackUrl()</param>
         /// <returns></returns>
         [HttpPost, Route("api/webhooktrigger/subscribe")]
         public HttpResponseMessage Subscribe([FromBody] string callbackUrl)
@@ -25,9 +26,8 @@ namespace LogicAppTriggers.Controllers
             return Request.CreateResponse();
         }
 
-
         /// <summary>
-        /// Fire all triggers - do a GET to this API to fire all triggers subscribed
+        /// Fire all triggers. To fire all subscribed triggers, perform a GET to this API.
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("api/webhooktrigger/trigger")]
@@ -41,7 +41,7 @@ namespace LogicAppTriggers.Controllers
             return Request.CreateResponse(HttpStatusCode.Accepted, String.Format("There are {0} subscriptions fired", subscriptions.Count));
         }
         /// <summary>
-        /// Unsubscribe
+        /// Unsubscribe from webhook.
         /// </summary>
         /// <param name="callbackUrl"></param>
         /// <returns></returns>
